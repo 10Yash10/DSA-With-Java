@@ -1,38 +1,85 @@
 import java.util.ArrayList;
-import java.util.TreeSet;
+// import java.util.TreeSet;
 
 class Test {
 
     public static ArrayList<Integer> union(int arr1 [], int arr2 []){
-        TreeSet<Integer> ts = new TreeSet<>();
-        for(int i: arr1){
-            // System.out.println("adding values to set for first time" + i);
-            ts.add(i);
-        }
-        for(int i: arr2){
-            // System.out.println("adding values to set for second time" + i);
-            ts.add(i);
-        }
+        // TreeSet<Integer> ts = new TreeSet<>();
+        // for(int i: arr1){
+            //     // System.out.println("adding values to set for first time" + i);
+            //     ts.add(i);
+            // }
+            // for(int i: arr2){
+                //     // System.out.println("adding values to set for second time" + i);
+                //     ts.add(i);
+            // }
+            // ArrayList<Integer> al = new ArrayList<>();
+            // for(int i: ts){
+            //     // System.out.println("adding values to list " + i);
+            //     al.add(i);
+            // }
         ArrayList<Integer> al = new ArrayList<>();
-        for(int i: ts){
-            // System.out.println("adding values to list " + i);
-            al.add(i);
+
+        int n = arr1.length - 1;
+        int m = arr2.length - 1;
+        int i = 0, j = 0;
+
+        while(i<=n && j<=m){
+            if(arr1[i] < arr2[j]){
+                al.add(arr1[i++]);
+            }
+            else if(arr1[i] > arr2[j]){
+                al.add(arr2[j++]);
+            }
+            else{
+                al.add(arr2[j++]);
+                i++;
+
+            }
+        }
+
+        while(i<=n){
+            al.add(arr1[i++]);
+        }
+        while(j<=m){
+            al.add(arr2[j++]);
+            i++;
         }
         return al;
     }
 
     public static ArrayList<Integer> intersection(int arr1[], int [] arr2){
-        TreeSet<Integer> ts = new TreeSet<>();
-        for(int i: arr1){
-            ts.add(i);
-        }
+        // TreeSet<Integer> ts = new TreeSet<>();
+        // for(int i: arr1){
+        //     ts.add(i);
+        // }
         
-        ArrayList<Integer> al= new ArrayList<>();
-        for(int i: arr2){
-            if(ts.contains(i)){
-                al.add(i);
+        // ArrayList<Integer> al= new ArrayList<>();
+        // for(int i: arr2){
+        //     if(ts.contains(i)){
+        //         al.add(i);
+        //     }
+        // }
+        // return al;
+
+        int n = arr1.length - 1;
+        int m = arr2.length - 1;
+        int i = 0, j = 0;
+
+        ArrayList<Integer> al = new ArrayList<>();
+        while(i<n && j<m){
+            if(arr1[i] < arr2[j]){
+                i++;
+            }
+            else if(arr1[i] > arr2[j]){
+                j++;
+            }
+            else{
+                al.add(arr2[j++]);
+                i++;
             }
         }
+
         return al;
     }
 
@@ -47,7 +94,7 @@ class Test {
         }
         System.out.println();
         ArrayList<Integer> al_intersection = intersection(arr1,arr2);
-        System.out.println("Intersection: ");
+        System.out.print("Intersection: ");
         for(int i: al_intersection){
             System.out.print(i+ " ");
         }
